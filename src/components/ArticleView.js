@@ -17,15 +17,6 @@ const ArticleView = ({article, toggle, keywordSearchHandler}) => {
   if (article.article_ids) {
     console.log("article ids", article.article_ids)
     doi = article.article_ids.doi
-    // if (typeof article.article_ids === 'string') {
-    //   // Force to array
-    //   article.article_ids = article.article_ids.split();
-    // }
-    // article.article_ids.keys.forEach(id => {
-    //   if (id.match(/\//)) {
-    //     doi = id;
-    //   }
-    // })
   }
   
   return (
