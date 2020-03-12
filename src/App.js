@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import {
-  ReactiveBase, DataSearch
+  ReactiveBase,
+  DataSearch,
+  ReactiveList,
 } from '@appbaseio/reactivesearch';
 
 import './App.css';
 import Bookbag from './components/bookbag/Bookbag';
 import SearchTips from './components/SearchTips';
+import SearchResultList from './components/SearchResultList';
 
 function App() {
 
@@ -33,6 +36,16 @@ function App() {
         renderError={renderError}
         URLParams
       />
+      <ReactiveList
+        componentId="results"
+        react={{and: ['query']}}
+        pagination={true}
+        URLParams
+      >
+        {({ data, error, loading }) => (
+          <SearchResultList results={data} />
+        )}
+      </ReactiveList>
     </>;
 
   return (
