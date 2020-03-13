@@ -10,24 +10,18 @@ const SearchResult = ({article, keywordSearchHandler}) => {
     setArticleView(!showArticleView)
   }
 
-  const mySearchHandler = (search) => {
-    console.log("handling search", search)
-    keywordSearchHandler(search)
-  }
+  const articleSummary = (
+    <div key={article._id} className="searchResult" >
+    <span className="clickForDetail" onClick={toggleArticleView}>Click for details</span>
+    <span><strong>{article.title}</strong>  {pubDateDisplay(article.pubDate)}</span>
+    <br/><br/>
+    <span><i>Subjects</i>: {subjectsDisplay(article.subjects, keywordSearchHandler, article._id)}</span>
+  </div>
+  );
 
-  if (showArticleView) {
-    return <ArticleView article={article} toggle={toggleArticleView} keywordSearchHandler={keywordSearchHandler} />
-  }
-  else {
-    return (
-      <div key={article._id} className="searchResult" onClick={toggleArticleView}>
-        <span className="clickForDetail">Click for details</span>
-        <span><strong>{article.title}</strong>  {pubDateDisplay(article.pubDate)}</span>
-        <br/><br/>
-        <span><i>Subjects</i>: {subjectsDisplay(article.subjects, mySearchHandler)}</span>
-      </div>
-    );
-  }
+  return showArticleView ? 
+    <ArticleView article={article} toggle={toggleArticleView} keywordSearchHandler={keywordSearchHandler} /> :
+    articleSummary;
 }
 
 export default SearchResult;

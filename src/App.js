@@ -1,9 +1,14 @@
 import React from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Link
+} from 'react-router-dom';
 import {
   ReactiveBase,
   DataSearch,
   ReactiveList,
+  SelectedFilters,
 } from '@appbaseio/reactivesearch';
 
 import './App.css';
@@ -17,6 +22,11 @@ function App() {
     console.log("ERROR", error);
   }
 
+  const keywordSearchHandler = (search) => {
+    console.log("handling search", search)
+    // history.push(`/?query="${search.value}"`)
+  }
+
   const mainComponent =
     <>
       <header>
@@ -26,6 +36,7 @@ function App() {
         </div>
         <h1>CPEP - PubMed search</h1>
       </header>
+      <SelectedFilters />
       <DataSearch
         componentId="query"
         className="search-bar"
@@ -35,6 +46,7 @@ function App() {
         placeholder="Search terms..."
         renderError={renderError}
         URLParams
+        showClear
       />
       <ReactiveList
         componentId="results"
@@ -43,7 +55,7 @@ function App() {
         URLParams
       >
         {({ data, error, loading }) => (
-          <SearchResultList results={data} />
+          <SearchResultList results={data} searchHandler={keywordSearchHandler} />
         )}
       </ReactiveList>
     </>;

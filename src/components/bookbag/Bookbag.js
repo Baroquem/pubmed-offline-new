@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Link, useHi } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Citation from './Citation';
 import { getSavedArticles, clearBookbag } from '../../utils';
@@ -19,7 +19,7 @@ const Bookbag = () => {
   const verbForm = (number) => number !== 1 ? 'are' : 'is';
 
   return (
-    <Fragment>
+    <>
       <header>
         <div class="navlinks">
           <Link to="/">Back to search</Link>
@@ -42,7 +42,7 @@ const Bookbag = () => {
           </div>
         </div>
       }
-    </Fragment>
+    </>
   );
 }
 

@@ -29,7 +29,7 @@ const ArticleView = ({article, toggle, keywordSearchHandler}) => {
       <br/>
       <div><b>Subjects</b>
         <br />
-        <i>{subjectsDisplay(article.subjects, mySearchHandler)}</i>
+        <i>{subjectsDisplay(article.subjects, mySearchHandler, article._id)}</i>
       </div>
       <br/>
       { article.abstract &&

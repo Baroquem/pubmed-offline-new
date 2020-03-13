@@ -1,8 +1,19 @@
 import React from 'react';
+import { ToggleButton } from '@appbaseio/reactivesearch';
 
 export const subjectsDisplay = (subjects, searchHandler) => {
   const linkedSubjects = subjects.map(s => <span className="keyword" key={s} onClick={(e) => {e.stopPropagation(); searchHandler(s)}}>{s}</span>);
   return linkedSubjects;
+  // return (
+  //   <ToggleButton
+  //     componentId={"keywords-"+{id}}
+  //     dataField="subjects"
+  //     data={subjects.map(s => { 
+  //       return { label: s, value: s }}
+  //     )}
+  //     onChange={searchHandler}
+  //   />
+  // );
 }
 
 // Display publication date. Input date should be an object of the form
