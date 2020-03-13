@@ -16,13 +16,23 @@ import Bookbag from './components/bookbag/Bookbag';
 import SearchTips from './components/SearchTips';
 import SearchResultList from './components/SearchResultList';
 
+const INDEX_FIELDS = {
+  DEFAULT: ["title","abstract","subjects"],
+  KEYWORD_ONLY: ["subjects"]
+}
+
+
+// NOTE: This could be written as a functional component, except that
+// we need to use setState with a callback in order to manually trigger
+// the search query behavior in <DataSearch> (which ability is needed,
+// in turn, to switch between regular searches and keyword searches).
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       value: "",
-      indexFields: ["title","abstract","subjects"],
+      indexFields: INDEX_FIELDS.DEFAULT,
     }
   }
 
@@ -32,7 +42,10 @@ class App extends Component {
 
   keywordSearchHandler = (search) => {
     console.log("handling search", search)
-    // history.push(`/?query="${search.value}"`)
+    this.setState({
+      value: search,
+      indexFields: INDEX_FIELDS.KEYWORD_ONLY,
+    });
   }
 
   render() {
@@ -61,6 +74,7 @@ class App extends Component {
             this.setState(
               {
                 value,
+                indexFields: INDEX_FIELDS.DEFAULT,
               },
               () => triggerQuery(),
             );
