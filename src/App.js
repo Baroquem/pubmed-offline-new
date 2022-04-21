@@ -17,7 +17,7 @@ import SearchTips from './components/SearchTips';
 import SearchResultList from './components/SearchResultList';
 
 const INDEX_FIELDS = {
-  DEFAULT: ["title","abstract","subjects"],
+  DEFAULT: ["title","abstract","subjects", "fulltext"],
   KEYWORD_ONLY: ["subjects"]
 }
 
@@ -69,6 +69,8 @@ class App extends Component {
           renderError={this.renderError}
           URLParams
           showClear
+          highlight={true}
+          highlightField="fulltext"
           value={this.state.value}
           onChange={(value, triggerQuery, event) => {
             this.setState(
@@ -94,7 +96,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <ReactiveBase app="articles" credentials="this doesn't really matter" url="http://localhost:9200">
+        <ReactiveBase
+          app="articles"
+          credentials="this doesn't really matter"
+          url="http://localhost:9200"
+        >
           <BrowserRouter>
             <Route exact path="/" render={() => mainComponent} />
             <Route path="/bookbag" component={Bookbag} />

@@ -39,6 +39,20 @@ const ArticleView = ({article, toggle, keywordSearchHandler}) => {
         </div>
       }
       <br/>
+      { article.highlight?.fulltext &&
+        <>
+        <b>Search results</b><br/>
+        {article.highlight.fulltext.map(h => (
+          <>
+            {'...'}
+            <span dangerouslySetInnerHTML={{__html:h}} />
+            {'...'}
+            <br/>
+          </>
+        ))}
+        </>
+      }
+      <br/>
       {doi &&
         <span>DOI: {doi}</span>
       }
