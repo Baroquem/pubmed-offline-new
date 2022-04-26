@@ -1,15 +1,13 @@
 # syntax=docker/dockerfile:1
 FROM node:12-alpine
 
-WORKDIR /app
+WORKDIR /usr/src/app/cpep
 
-COPY package.json ./
-COPY yarn.lock ./
-
+COPY . .
 RUN yarn install
 RUN yarn add pm2
 
-COPY . ./
+
 
 EXPOSE 3000
 

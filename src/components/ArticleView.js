@@ -13,10 +13,11 @@ const ArticleView = ({article, toggle, keywordSearchHandler}) => {
 
   console.log("article being shown", article)
 
-  let doi = null
+  let doi, link = null
   if (article.article_ids) {
     console.log("article ids", article.article_ids)
     doi = article.article_ids.doi
+    link = article.article_ids.collection + ".pdf"
   }
   
   return (
@@ -27,10 +28,13 @@ const ArticleView = ({article, toggle, keywordSearchHandler}) => {
       <br/>
       <div className="authors">{article.authors.join('; ')}</div>
       <br/>
-      <div><b>Subjects</b>
-        <br />
-        <i>{subjectsDisplay(article.subjects, mySearchHandler, article._id)}</i>
-      </div>
+      { article.subjects.length > 0 &&
+        <div><b>Subjects</b>
+          <br />
+          <i>{subjectsDisplay(article.subjects, mySearchHandler, article._id)}</i>
+        </div>
+      }
+
       <br/>
       { article.abstract &&
         <div>
@@ -55,6 +59,9 @@ const ArticleView = ({article, toggle, keywordSearchHandler}) => {
       <br/>
       {doi &&
         <span>DOI: {doi}</span>
+      }
+      { link &&
+        <span><a href={link} target="_blank">Original document</a></span>
       }
       <br/><br/>
       <button onClick={() => { saveArticle(article); setSaved(true); }}>Save to bookbag</button>
